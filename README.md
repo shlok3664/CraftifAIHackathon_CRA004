@@ -83,7 +83,7 @@ See the exported project files for the exact installation and execution commands
 
 - `README.md` — Project overview and documentation
 - `metadata.json` — Structured frame and detection metadata, if included in the export
-- `evidence/` — Screenshots documenting the pipeline, compilation, evaluation, and runtime output
+- `evidence` — Screenshots documenting the pipeline, compilation, evaluation, and runtime output
 
 The exact files may vary depending on the exported project version.
 
@@ -101,6 +101,7 @@ The exact files may vary depending on the exported project version.
 - Measure false positives and false negatives for hazard-zone alerts.
 - Improve alert reliability and document deployment requirements.
 
+
 ## Acknowledgements
 
 Built using YOLO, NVIDIA TensorRT, GStreamer, and the associated project tooling and dependencies. See the relevant upstream projects for licensing and attribution details.
@@ -108,3 +109,5 @@ Built using YOLO, NVIDIA TensorRT, GStreamer, and the associated project tooling
 ## License
 
 This project is distributed under the license specified in the repository. Refer to `LICENSE` for details.
+
+The complete export is too large for GitHub: https://drive.google.com/drive/folders/1CGiPUQAo8Sez8bVkmlQQto03wD_R-3JY?usp=drive_link
