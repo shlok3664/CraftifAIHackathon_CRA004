@@ -6,13 +6,16 @@ Sentinel-Embedded is a computer-vision pipeline that detects and tracks people i
 
 The project explores how edge-AI inference can be integrated with tracking, event detection, and messaging components for industrial monitoring applications.
 
+> **Full project export:** [Access Sentinel-Embedded Core on Google Drive](https://drive.google.com/drive/folders/1CGiPUQAo8Sez8bVkmlQQto03wD_R-3JY?usp=drive_link)  
+> The complete export contains larger project files that are not hosted directly on GitHub. The `evidence/` folder below contains selected screenshots and reports. Please check that the Drive folder is accessible to reviewers.
+
 ## Key Features
 
 - **Person Detection:** Detect people in video frames using YOLO11s.
-- **Persistent Object Tracking:** Associate detections across frames using a custom Hungarian algorithm-based tracker with Intersection over Union (IoU).
+- **Persistent Object Tracking:** Associate detections across frames using a Hungarian algorithm-based tracker with Intersection over Union (IoU).
 - **Hazard-Zone Monitoring:** Evaluate tracked objects against configurable zones and identify potential intrusions.
 - **GPU Inference Optimization:** Compile the detection model into a TensorRT FP16 engine.
-- **MQTT Alert Publishing:** Publish intrusion events to a configured MQTT broker.
+- **MQTT Alert Publishing:** Publish configured intrusion events to an MQTT broker.
 - **Structured Metadata:** Export frame-level detection, tracking, and zone information as JSON.
 - **Visual Monitoring:** Generate annotated video with bounding boxes, tracking IDs, hazard-zone indicators, and intrusion counters.
 
@@ -40,11 +43,11 @@ The pipeline follows this processing sequence:
 | Compiled engine size | 26.9 MB |
 | Reported engine build time | 15.6 seconds |
 
-The engine size and build time describe compilation results, not runtime throughput. Runtime performance depends on the hardware, software stack, input workload, and execution configuration.
+Engine size and build time describe compilation results, not runtime throughput. Runtime performance depends on the hardware, software stack, input workload, and execution configuration.
 
 ## Preliminary Evaluation
 
-The TensorRT FP16 model was evaluated against an ONNX baseline using a 30-sample subset of the COCO 2017 validation dataset.
+The TensorRT FP16 model was compared with an ONNX baseline using a 30-sample subset of the COCO 2017 validation dataset.
 
 | Metric | TensorRT FP16 result |
 |---|---:|
@@ -54,19 +57,21 @@ The TensorRT FP16 model was evaluated against an ONNX baseline using a 30-sample
 | Recall@0.5 | 0.6655 |
 | mAP@0.5 difference versus ONNX | −0.0003 |
 
-The reported mAP@0.5 difference indicates a small observed difference from the ONNX baseline on this evaluation subset. It should not be interpreted as a comprehensive assessment of model equivalence or deployment accuracy.
+The reported mAP@0.5 difference is the observed difference from the ONNX baseline on this evaluation subset. It should not be interpreted as a comprehensive assessment of model equivalence or deployment accuracy.
 
 **Evaluation scope:** This is a preliminary experiment on a small sample, not a representative benchmark of industrial environments. COCO-based metrics do not directly measure hazard-zone intrusion detection accuracy.
 
-The pipeline was also executed with object tracking, zone monitoring, and MQTT publishing enabled. Runtime logs and visual outputs provide evidence of component integration. End-to-end latency, independently measured inference throughput, and real-world alert accuracy have not yet been established through repeatable benchmarks.
+The pipeline was also executed with object tracking, zone monitoring, and MQTT publishing enabled. Runtime logs and visual outputs provide evidence of component integration. End-to-end latency, independently measured inference throughput, and real-world alert accuracy have not yet been established through repeatable benchmarks. The latency-tracing screenshots are diagnostic evidence only; anomalous tracer values mean they should not be treated as reliable end-to-end latency measurements.
 
 ## Outputs
 
-The pipeline is designed to produce the following outputs, subject to the selected runtime configuration:
+Depending on the selected runtime configuration, the pipeline is designed to produce:
 
 - **Annotated video:** Visualizes detections, track IDs, zone boundaries, and intrusion counters.
 - **JSON metadata:** Records frame information, detections, tracking IDs, and zone-related information.
 - **MQTT events:** Publishes configured intrusion alerts to the selected broker.
+
+Output filenames and destinations depend on the project configuration. Refer to the exported configuration and runtime instructions for the exact paths.
 
 ## Requirements
 
@@ -81,9 +86,9 @@ Exact dependency versions, environment variables, and execution commands should 
 
 ## Running the Project
 
-The full exported project and its configuration files are available in the linked Google Drive folder below.
+The full exported project and its configuration files are available in the [Google Drive export](https://drive.google.com/drive/folders/1CGiPUQAo8Sez8bVkmlQQto03wD_R-3JY?usp=drive_link).
 
-The general workflow is:
+General workflow:
 
 1. Set the input video source and hazard-zone parameters.
 2. Configure MQTT connectivity and output destinations.
@@ -91,25 +96,24 @@ The general workflow is:
 4. Launch the pipeline using the execution commands provided with the export.
 5. Inspect the generated video, JSON metadata, runtime logs, and MQTT events.
 
-**Full project export:** [Sentinel-Embedded — Google Drive](https://drive.google.com/drive/folders/1CGiPUQAo8Sez8bVkmlQQto03wD_R-3JY?usp=drive_link)
+Exact launch commands are not reproduced here because they depend on the exported runtime configuration. Use the commands supplied with the export.
 
-The repository provides the project overview and supporting evidence; the full export contains the larger project files that are not hosted directly on GitHub.
+## Evidence
 
-## Repository Structure
+The following files are currently present in the repository's `evidence/` directory:
 
-```text
-Sentinel-Embedded/
-├── README.md
-├── LICENSE
-├── metadata.json       # If included in this export
-└── evidence/
-    ├── ir_graph.png
-    ├── engine_build.png
-    ├── accuracy.png
-    └── live_run.png
-```
+- [Pipeline IR graph](evidence/IR_graph.png.png)
+- [TensorRT engine build log](evidence/TensorRT%20engine_build.png.png)
+- [FP16 benchmark report](evidence/Benchmark%20F16.png.png)
+- [Accuracy evaluation](evidence/accuracy.png.png)
+- [ONNX validation/check](evidence/onnx_check.png.png)
+- [Live annotated run](evidence/live_run.png.png)
+- [MQTT listener output](evidence/mqtt_listener.png.png)
+- [Latency tracing capture 1](evidence/latency_tracing.png.png)
+- [Latency tracing capture 2](evidence/latency_tracing.2png.png)
+- [INT8 comparison](evidence/INT8%20Comparsion.png.png)
 
-*Illustrative structure: retain only filenames and directories that actually exist in the repository.*
+The INT8 comparison is a separate experiment; the evaluation table above reports the FP16 result. Tracing captures are included for diagnostic transparency and should not be read as validated end-to-end latency benchmarks.
 
 ## Limitations
 
@@ -135,4 +139,4 @@ Built with YOLO, NVIDIA TensorRT, GStreamer, and the associated project tooling 
 
 ## License
 
-Refer to the repository's `LICENSE` file for the applicable license and usage terms.
+This repository is distributed under the [MIT License](LICENSE). Third-party models, libraries, and dependencies may have separate license terms; review their respective licenses before redistribution or deployment.
