@@ -20,4 +20,6 @@ Sentinel is a workplace-safety vision system built on CraftifAI PipeGen. It proc
 - `model_compile_output/`: TensorRT engine build artifacts and config files.
 - `output/`: Output JSON metadata (`metadata.json`) and processed incident log (`incidents.json`).
 - `evidence/`: IR graph, speed benchmarks, and live run screenshots.
-> **Note on Export:** The core application export is bundled in `sentinel-export.zip`. Extract it using `unzip sentinel-export.zip` to review the pipeline scripts and generated output metadata.
+
+## Full PipeGen export
+Download:https://drive.google.com/drive/folders/1CGiPUQAo8Sez8bVkmlQQto03wD_R-3JY?usp=drive_link
