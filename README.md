@@ -139,4 +139,4 @@ Built with YOLO, NVIDIA TensorRT, GStreamer, and the associated project tooling 
 
 ## License
 
-This repository is distributed under the [MIT License](LICENSE). Third-party models, libraries, and dependencies may have separate license terms; review their respective licenses before redistribution or deployment.
+This repository is distributed under the [MIT License](LICENSE). Third-party models, libraries, and dependencies may have separate license terms; review their respective licenses before redistribution or deployment..
